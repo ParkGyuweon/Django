@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>베스트 셀러 목록</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            color: #212529;
+        }
+
+        .nav-bar {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .nav-bar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .nav-bar ul li {
+            margin-right: 20px;
+        }
+        .nav-bar ul li a {
+            text-decoration: none;
+            color: #343a40;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        .container {
+            padding: 0 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1.page-title {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 40px;
+            font-size: 24px;
+        }
+
+        .book-item {
+            padding: 15px; 
+            margin-bottom: 0; /* 배경색 블록들이 딱 붙도록 여백 제거 */
+        }
+        .book-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .book-info {
+            font-size: 15px;
+            color: #868e96;
+            margin-bottom: 5px;
+        }
+
+        .bg-red { background-color: #ffe3e3; }
+        .bg-blue { background-color: #e5e0ff; }
+        .bg-green { background-color: #d3f9d8; }
+        .bg-transparent { background-color: transparent; }
+
+        hr.divider {
+            border: 0;
+            border-top: 1px solid #e9ecef;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+      <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'libraries:recommend' %}">Recommend</a></li>
+        <li><a href="{% url 'libraries:bestseller' %}">BestSeller</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">베스트 셀러 목록</h1>
+
+        {% for item in result %}
+        
+        <div class="book-item 
+            {% if forloop.counter == 1 %} bg-red 
+            {% elif forloop.counter == 2 %} bg-blue 
+            {% elif forloop.counter == 3 %} bg-green 
+            {% else %} bg-transparent {% endif %}">
+            
+            <div class="book-title">{{ item.title }}</div>
+            <div class="book-info">저자: {{ item.author }}</div>
+            <div class="book-info">설명: {{ item.bestduration }}</div>
+        </div>
+        
+        {% if forloop.counter > 2 %}
+            <hr class="divider">
+        {% endif %}
+
+        {% endfor %}
+        
+    </div>
+
+</body>
+</html>

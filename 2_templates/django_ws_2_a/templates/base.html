@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Project</title>
+    
+    <style>
+        .nav-bar ul {
+            list-style-type: none; 
+            padding: 0;
+            margin: 0;
+            display: flex; 
+        }
+        .nav-bar li {
+            margin-right: 20px; 
+        }
+    </style>
+    </head>
+<body>
+    <div class="nav-bar">
+        <ul>
+            <li><a href="{% url 'todos:index' %}">[INDEX]</a></li>
+            <li><a href="{% url 'todos:create_todo' %}">[CREATE]</a></li>
+        </ul>
+    </div>
+    <hr>
+
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

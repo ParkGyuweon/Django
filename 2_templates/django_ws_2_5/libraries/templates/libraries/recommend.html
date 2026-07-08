@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신간 도서 목록</title>
+  <style>
+    /* 기본 여백 초기화 */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        color: #212529;
+    }
+
+    .nav-bar {
+        background-color: #f8f9fa;
+        padding: 10px 20px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .nav-bar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .nav-bar ul li {
+        margin-right: 20px;
+    }
+    .nav-bar ul li a {
+        text-decoration: none;
+        color: #343a40;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 4px;
+    }
+    .nav-bar ul li a.active {
+        background-color: #5cb85c; /* 초록색 활성 버튼 */
+        color: white;
+    }
+
+    .container {
+        padding: 0 40px; /* 화면 양옆 여백 */
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    h1.page-title {
+        text-align: center; /* 제목 중앙 정렬 */
+        margin-top: 50px;
+        margin-bottom: 50px;
+        font-size: 24px;
+    }
+
+    .book-item {
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+    .book-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .book-author {
+        font-size: 15px;
+        color: #868e96; /* 저자 정보 회색 처리 */
+    }
+
+    hr.divider {
+        border: 0;
+        border-top: 1px solid #e9ecef;
+        margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+      <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'libraries:recommend' %}">Recommend</a></li>
+        <li><a href="{% url 'libraries:bestseller' %}">BestSeller</a></li>
+      </ul>
+    </div>
+
+  <div class="container">
+      <h1 class="page-title">주목할 만한 신간 도서 목록</h1>
+      
+      {% for item in result %}
+      <div class="book-item">
+          <div class="book-title">{{ item.title }}</div>
+          <div class="book-author">저자: {{ item.author }}</div>
+      </div>
+      <hr class="divider">
+      {% endfor %}
+      
+  </div>
+
+</body>
+</html>
